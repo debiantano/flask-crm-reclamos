@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<form name="reclamo" action="/message" method="POST">
+  <div class="row">
+    <div class="col-md-5">
+      <div>
+        
+        <div class="form-group row">
+          <label for="dni" class="col-sm-2 col-form-label">DNI</label>
+          <div class="col-sm-10 has-validation">
+            <input type="text" class="form-control" name="dni" value="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nombre" value="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="apellido" value="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="ciudad" class="col-sm-2 col-form-label">Ciudad</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="ciudad" value="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="correo" class="col-sm-2 col-form-label">Correo</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="correo" value="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="telefono" class="col-sm-2 col-form-label">Teléfono</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="telefono" value="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="direccion" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------------------------------------------------------------------->
+    <div class="col-md-7">
+      <div>
+        <div class="form-group row">
+          <label for="departamento" class="col-sm-2 col-form-label">Departamento</label>
+          <div class="col-sm-10">
+            <select class="custom-select" name="departamento">
+              <option value="ventas">ventas</option>
+              <option value="administrativo">administrativo</option>
+              <option value="cliente">cliente</option>
+              <option value="marketing">marketing</option>
+              <option value="5">...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="tipo_reclamo" class="col-sm-2 col-form-label">Tipo de reclamo</label>
+          <div class="col-sm-10">
+            <select class="custom-select" name="tipo_reclamo">
+              <option value="a">a</option>
+              <option value="b">b</option>
+              <option value="c">c</option>
+              <option value="d">d</option>
+              <option value="5">...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="subtipo" class="col-sm-2 col-form-label">Subtipo</label>
+          <div class="col-sm-10">
+            <select class="custom-select" name="subtipo">
+              <option value="a">a</option>
+              <option value="b">b</option>
+              <option value="c">c</option>
+              <option value="d">d</option>
+              <option value="5">...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="nombre" class="col-sm-2 col-form-label">Descripción del reclamo</label>
+          <div class="col-sm-10">
+            <textarea name="mensaje" class="form-control" id="mensaje"
+              rows="9"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col text-center">
+    <button type="submit" class="btn btn-info justify-content-center btn-envio">Generar trámite</button>
+  </div>
+</form>
+
+
+<script>
+  const btnDelete = document.querySelectorAll('.btn-envio');
+
+  if (btnDelete) {
+    const btnArray = Array.from(btnDelete);
+    btnArray.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        if (!confirm('¿Estas seguro de enviar este formulario?')) {
+          e.preventDefault();
+        }
+      });
+    })
+  }
+</script>
+
+{% endblock %}
