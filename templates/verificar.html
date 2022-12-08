@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="px-2 bg-pink-800 border-gray-200">
+        <div class="container flex flex-wrap items-center justify-between mx-auto">
+            <a href="/reclamo" class="flex items-center">
+                <svg style="color: rgb(255, 255, 255);" stroke="currentColor" width="22" height="22" fill="currentColor"
+                    stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z">
+                    </path>
+                </svg>
+                <span
+                    class="self-center text-xl font-semibold whitespace-nowrap dark:text-white px-4 pb-1">Reclamos</span>
+            </a>
+
+            <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
+                <ul
+                    class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                    <li>
+                        <a disabled id="telefono" href="/telefono"
+                            class="hidden block py-2 pl-3 pr-4 text-gray-700 rounded md:border-0  md:p-0 dark:text-gray-400">
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
+                                height="29px" width="29px" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path
+                                    d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1.02 1.02 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2a9 9 0 00-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <button disabled href="/verificar_tramite"
+                            class="inline-block text-sm px-4 py-2 leading-none border border-pink-800 rounded text-pink-800 bg-pink-800 mt-4 lg:mt-0">Verificar
+                            trámite</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex mb-4">
+        <div class="w-1/2 p-2 text-center">
+            <!--FORM 1-->
+            <form action="/verificar_tramite" method="POST" class="w-full" style="padding-top: 140px;padding-bottom: 20px;">
+                <div class="md:flex md:items-center mb-1">
+                    <div class="md:w-1/3">
+                        <label class="block text-black font-bold md:text-right mb-1md:mb-0 pr-4"
+                            for="inline-full-name">
+                            Nro trámite:
+                        </label>
+                    </div>
+                    <div class="md:w-1/3">
+                        <input autocomplete="off" class="bg-gray-200 appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white  border-gray-300 focus:border-pink-500"
+                            name="nro_reclamo" type="text" value="">
+                    </div>
+                    <div class="md:w-1/3">
+                        <button
+                            class="ml-8 bg-pink-800 appearance-none border-2 rounded w-full py-2 px-4 text-gray-100 leading-tight focus:outline-none focus:bg-pink-700  border-pink-800 focus:border-pink-500"
+                            name="id_cliente" type="text">Enviar</button>
+                    </div>
+                </div>
+
+                <div class="md:flex md:items-center mb-3 mt-3">
+                    <div class="md:w-1/3">
+                        <label class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
+                            for="inline-full-name">
+                            Usuario:
+                        </label>
+                    </div>
+                    <div class="md:w-1/3">
+                        <input
+                            class="bg-gray-100 appearance-none rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white  border-gray-100"
+                            name="nro_boleta" type="text" value="" disabled>
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-3">
+                    <div class="md:w-1/3">
+                        <label class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
+                            for="inline-full-name">
+                            Dirección:
+                        </label>
+                    </div>
+                    <div class="md:w-1/3">
+                        <input
+                            class="bg-gray-100 appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white  border-gray-100"
+                            name="direccion" type="text" value="" disabled>
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-1">
+                    <div class="md:w-1/3">
+                        <label class="block text-black font-bold md:text-right mb-1 md:mb-0 pr-4"
+                            for="inline-full-name">
+                            Teléfono:
+                        </label>
+                    </div>
+                    <div class="md:w-1/3">
+                        <input
+                            class="bg-gray-100 appearance-none border-2 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white  border-gray-100"
+                            name="telefono" type="text" value="" disabled>
+                    </div>
+                </div>
+            </form>
+
+            
+            <!--FORM-->
+        </div>
+
+
+        <!--GRAFICO-->
+        <center>
+            <div class="w-1/2 p-2">
+                <div class="pt-5" style="width: 450px; height: 450px;">
+                    <div class="font-medium">Cantidad de reclamos</div>
+                    <canvas id="myChart"></canvas>
+                  </div> 
+            </div>
+        </center>
+
+        <script>
+            const ctx = document.getElementById('myChart');
+            const data = JSON.parse('{{ data | tojson | safe}}');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Ventas', 'Administrativo', 'Cliente', 'Marketing'],
+                    datasets: [{
+                        label: '# reclamos',
+                        data: [data.ventas, data.administrativo, data.cliente, data.marketing],
+                        borderWidth: 1,
+                        backgroundColor: [
+                        '#BD808C',
+                        '#FFC8D6',
+                        '#FFD9E0',
+                        '#FF2C55'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+    </div>
+
+
+</body>
+
+</html>

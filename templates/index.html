@@ -1,21 +1,40 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="es">
 
-{% block body %}
+<head>
+    <title>CRM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-
-<div class="text-center mt-5">
-  <a class="navbar-brand" href="/reclamo">
-    <button type="button" class="btn btn-secondary">Reclamo</button>
-  </a>
-  <br>
-  <a class="navbar-brand" href="/busqueda">
-    <button type="button" class="btn btn-secondary">Busqueda</button>
-  </a>
-  <br>
-  <a class="navbar-brand" href="/tramite">
-    <button type="button" class="btn btn-secondary">Trámite</button>
-  </a>
+<body>
+    
+<div>
+    <div class="text-center p-8 font-bold" style="font-size: 40px;">
+        CRM
+    </div>
+    <div class="flex items-center min-h-screen bg-gray-50 ">
+        <div class="container max-w-6xl px-5 mx-auto my-28">
+            <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="p-5 bg-white rounded shadow-sm">
+                        <div class="text-2xl font-bold text-gray-900 ">modulo 1</div>
+                </div>
+                <div class="p-5 bg-white rounded shadow-sm">
+                        <div class="text-2xl font-bold text-gray-900 ">modulo 2</div>
+                </div>
+                <div class="p-5 bg-white rounded shadow-sm">
+                        <div class="text-2xl font-bold text-gray-900 ">modulo 3</div>
+                </div>
+                <button onclick="location.href='/reclamo'">
+                    <div class="p-5 bg-pink-100 rounded shadow-sm ">
+                        <div class=" text-center text-2xl font-bold text-gray-900">reclamos</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
-{% endblock %}
+</body>
+
+</html>
