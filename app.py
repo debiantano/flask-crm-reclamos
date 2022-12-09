@@ -121,8 +121,8 @@ def verificar_tramite():
 def verificar():
     cursor = mysql.connection.cursor()
     #OBTENER DATOS POR ID_RECLAMO
-    nro_reclamo = request.form["nro_reclamo"]
-    cursor.execute("SELECT id_reclamo,CONCAT(nombre,' ',apellido) AS usuario,direccion,telefono FROM reclamos WHERE id_reclamo=%s", (nro_reclamo))
+    session["nro_reclamo"] = request.form["nro_reclamo"]
+    cursor.execute("SELECT id_reclamo,CONCAT(nombre,' ',apellido) AS usuario,direccion,telefono FROM reclamos WHERE id_reclamo=%s", (session["nro_reclamo"]))
     data = cursor.fetchall()[0]
     
     cursor.execute("SELECT departamento , count(*) AS cantidad FROM reclamos GROUP BY departamento")
@@ -134,7 +134,7 @@ def verificar():
     lista = {'ventas': cantidad[3], 'cliente': cantidad[1], 'marketing': cantidad[2], 'administrativo': cantidad[0]}
 
     # OBTENER DATOS DEL CLIENTE EN TABLA
-    cursor.execute('SELECT id_reclamo, CONCAT(YEAR(fecha),"-",MONTH(fecha),"-",DAY(fecha)) AS fecha, departamento, tipo_reclamo, subtipo, mensaje, estado FROM reclamos WHERE id_reclamo=%s', (nro_reclamo))
+    cursor.execute('SELECT id_reclamo, CONCAT(YEAR(fecha),"-",MONTH(fecha),"-",DAY(fecha)) AS fecha, departamento, tipo_reclamo, subtipo, mensaje, estado FROM reclamos WHERE id_reclamo=%s', (session["nro_reclamo"]))
     tabla = cursor.fetchall()
     print(tabla[0])
     return render_template("verificar2.html", user=data, data=lista, tabla=tabla)
@@ -143,11 +143,24 @@ def verificar():
 # 2
 @app.route("/tramite")
 def tramite():
-    return render_template("tramite.html")
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT id_reclamo,CONCAT(nombre,' ',apellido) AS usuario,direccion,telefono FROM reclamos WHERE id_reclamo=%s", (session["nro_reclamo"]))
+    user = cursor.fetchall()[0]
+    print(user)
+    return render_template("tramite.html", id_cliente=session["id_cliente"], user=user)
 
 @app.route("/enviar_tramite", methods=["POST"])
 def enviar_tramite():
-    return session["id_cliente"]
+    departamento =request.form["departamento"]
+    tipo = request.form["tipo"]
+    subtipo = request.form["subtipo"]
+    mensaje = request.form["mensaje"]
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("INSERT INTO reclamos (ruc, fecha, dni, nombre, apellido, ciudad, correo, telefono, direccion, departamento, tipo_reclamo, subtipo, mensaje, estado) VALUES ('', NOW(), '', '', '', '', '', '', '', %s, %s, %s, %s, 'en espera')", (departamento, tipo, subtipo, mensaje))
+    mysql.connection.commit()
+    
+    return redirect(url_for("reclamo"))
 
 
 if __name__=="__main__":
