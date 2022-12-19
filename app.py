@@ -1,5 +1,15 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, session
 from flask_mysqldb import MySQL
+import vonage
+
+VONAGE_API_KEY = "4e17b532"
+VONAGE_API_SECRET = "phEdCRhz7w7OmhED"
+VONAGE_NUMBER = "51925884305"
+
+# Create a new Vonage Client object:
+vonage_client = vonage.Client(
+    key=VONAGE_API_KEY, secret=VONAGE_API_SECRET
+)
 
 app = Flask(__name__)
 
@@ -7,161 +17,120 @@ app = Flask(__name__)
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_HOST'] = '127.0.0.1'
-app.config['MYSQL_DB'] = 'crm'
+app.config['MYSQL_DB'] = 'crm_reclamos'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.secret_key="u39@v9kGE#cs"
 mysql = MySQL(app)
 
-# LLAVE
-app.secret_key = "my_secret_key"
-
-# PAGINA PRINCIPAL DEL CRM //               index.html
 @app.route("/")
 def index():
     return render_template("index.html")
 
-# PAGINA PRINCIPAL DE RECLAMOS              reclamo.html
-@app.route("/reclamo")
-def reclamo():
-    return render_template("reclamo.html")
+# SERVICIO TECNICO
+@app.route("/servicio")
+def servicio():
+    return render_template("servicio.html")
 
-
-from strategy import Context, Exito, IMensaje, Error, Mensaje
-CONTEXT = Context()
-
-
-# ENVIAR LOS DATOS ID_CLIENTE NRO_BOLETA    activo.html
-@app.route("/buscar", methods=["POST"])     
-def buscar():
+@app.route("/servicio_reclamo", methods=["GET","POST"])
+def servicio_reclamo():
     cursor = mysql.connection.cursor()
-    session["id_cliente"] = request.form["id_cliente"]
-    session["nro_boleta"] = request.form["nro_boleta"]
-
-    cursor.execute("SELECT id_cliente, nro_boleta,telefono FROM cliente WHERE id_cliente=%s and nro_boleta=%s", (session["id_cliente"], session["nro_boleta"]))
-    data = cursor.fetchall()
     
-    if data:
-        session["telefono"] = data[0]["telefono"]
-        cursor.execute("SELECT id_reclamo FROM reclamos_generales ORDER BY id_reclamo DESC LIMIT 1")
-        session["id_reclamo"] = cursor.fetchall()[0]["id_reclamo"]
+    if request.method == "POST":
+        nombres = request.form["nombres"]
+        ap_paterno = request.form["ap_paterno"]
+        ap_materno= request.form["ap_materno"]
+        correo = request.form["correo"]
+        dni = request.form["dni"]
         
-        flash(str(CONTEXT.request(Exito)))
+        cursor.execute("SELECT telefono FROM cliente WHERE nombres=%s and apellido_paterno=%s and apellido_materno=%s and correo=%s and dni=%s", (nombres, ap_paterno, ap_materno, correo, dni))
+        
+        data = cursor.fetchall()
+        if data:
+            session["telefono"] = data[0]["telefono"]
+            return redirect(url_for("enviar"))
+        else:
+            flash('''<div id="overlay" class="fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60"></div><div id="dialogo" class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg"><div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M11.001 10h2v5h-2zM11 16h2v2h-2z"></path><path d="M13.768 4.2C13.42 3.545 12.742 3.138 12 3.138s-1.42.407-1.768 1.063L2.894 18.064a1.986 1.986 0 0 0 .054 1.968A1.984 1.984 0 0 0 4.661 21h14.678c.708 0 1.349-.362 1.714-.968a1.989 1.989 0 0 0 .054-1.968L13.768 4.2zM4.661 19 12 5.137 19.344 19H4.661z"></path></svg></div><div class="py-5 border-t border-b border-gray-300 text-center"><p>Los datos del cliente no han sido encontrados</p></div><div class="flex justify-end"><button id="close" class="px-5 py-2 bg-purple-500 hover:bg-purple-700 text-white cursor-pointer rounded-md">Aceptar</button></div></div>''')
+            return redirect(url_for("index"))
 
-        return redirect(url_for("activo"))
-    else:
-        flash(str(CONTEXT.request(Error)))
+    return render_template("servicio_reclamo.html")
 
-        return redirect(url_for("reclamo"))
-
-# RENDERIZAR PAGINA HABILITADO PARA INTERACTUAR
-@app.route("/activo", methods=["GET","POST"])
-def activo():
-    return render_template("activo.html",id_cliente=session["id_cliente"], nro_boleta=session["nro_boleta"], telefono=str(session["telefono"]), id_reclamo=session["id_reclamo"])
-
-# MOSTRAR TABLA
-@app.route("/tabla")
-def tabla():
-    caso = request.args["caso"]
-    cur = mysql.connection.cursor()
-
-    cur.execute("SELECT titulo,descripcion FROM reclamos_generales WHERE caso=%s", (caso,))
-    tabla = cur.fetchall()
-
-    c1 = '''
-	<div class="fixed bg-gray-900 bg-opacity-60 h-screen inset-0 w-screen z-40"id=overlay></div><div class="fixed  -translate-x-1/2 -translate-y-1/2 bg-white drop-shadow-lg left-1/2 px-4 py-4 rounded-md space-y-4 top-1/2 z-50"id=dialogo><div class="flex flex-col"><div class="lg:-mx-8 overflow-x-auto sm:-mx-61"><div class="py-2 lg:px-8 sm:px-6"><div><table class="w-full text-left"><thead class="flex w-full bg-black text-white"><tr class="flex w-full mb-4"><th class="p-4 w-1/2">Pregunta<th class="p-4 w-1/2">Descripción<tbody class="flex w-full bg-grey-light flex-col items-center justify-between overflow-y-scroll"style=height:50vh>'''
-    c2 = ''
-    for i in tabla:
-        c2 += '''<tr class="flex w-full mb-4"><td class="p-4 w-1/2">'''
-        c2 += i["titulo"]
-        c2 += '''<td class="p-4 w-1/2">''' 
-        c2 += i["descripcion"] 
-        c2 += '</tr>'
-    c3= '''</table></div></div></div></div><center><button class="py-2 bg-pink-500 cursor-pointer hover:bg-pink-700 px-5 rounded-md text-white"id=close>Aceptar</button></center></div>'''
-    flash(c1+c2+c3)
-    return redirect(url_for("activo"))
-    #return render_template("activo.html",id_cliente=session["id_cliente"], nro_boleta=session["nro_boleta"], telefono=str(session["telefono"]), id_reclamo=session["id_reclamo"], tabla=tabla)
-
-# ENVIAR MENSAJE RECLAMO 
-@app.route("/mensaje", methods=["POST"])
-def enviar_mensaje():
-    
-    mensaje = request.form["mensaje"]
-    
+@app.route("/atencion_reclamo", methods=["GET","POST"])
+def atencion_reclamo():
     cursor = mysql.connection.cursor()
-    cursor.execute("INSERT INTO solucion_clientes (id_cliente, nro_boleta, solucion) VALUES(%s,%s,%s)", (session["id_cliente"], session["nro_boleta"], mensaje))
-    mysql.connection.commit()
-
-    flash(str(CONTEXT.request(Mensaje)))
-
-    return redirect(url_for("reclamo"))
-
-# TELEFONO
-@app.route("/telefono", methods=["GET"])
-def telefono():
-    flash('''
-    <div id="overlay" class="fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60"></div><div id="dialogo" class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-md px-4 py-4 space-y-4 drop-shadow-lg"> <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M15 3.75a.75.75 0 01.75-.75h4.5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0V5.56l-4.72 4.72a.75.75 0 11-1.06-1.06l4.72-4.72h-2.69a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd"></path></svg> </div><div class="py-5 border-t border-b border-gray-300 text-center"> <p class="font-bold">Llamada de conciliación</p><p>telefono : ''' + str(session["telefono"]) + '''</p></div><center> <button id="close" class="px-5 py-2 bg-pink-500 hover:bg-pink-700 text-white cursor-pointer rounded-md"> Aceptar </button> </center> </div>
-    ''')
-    return redirect(url_for("activo"))
-
-##########################################################################
-# 3
-@app.route("/verificar_tramite")
-def verificar_tramite():
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT departamento , count(*) AS cantidad FROM reclamos GROUP BY departamento")
-    count = cursor.fetchall()
     
-    cantidad = []
-    for i in count:
-        cantidad.append(i["cantidad"])
-    lista = {'ventas': cantidad[3], 'cliente': cantidad[1], 'marketing': cantidad[2], 'administrativo': cantidad[0]}
+    if request.method == "POST":
+        nombres = request.form["nombres"]
+        ap_paterno = request.form["ap_paterno"]
+        ap_materno= request.form["ap_materno"]
+        correo = request.form["correo"]
+        dni = request.form["dni"]
+        telefono = request.form["telefono"]
+        msg = request.form["msg"]
 
-    return render_template("verificar.html", data = lista)
+        cursor.execute("INSERT INTO atencion_reclamo (nombres, apellido_paterno, apellido_materno, correo, dni, telefono, msg) VALUES(%s,%s,%s,%s,%s,%s,%s)", (nombres, ap_paterno, ap_materno, correo, dni, telefono, msg))
+        mysql.connection.commit()
 
-@app.route("/verificar_tramite", methods=["POST"])
-def verificar():
+        flash('''<div id="overlay" class="fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60"></div><div id="dialogo" class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg"><div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><div class="py-5 border-t border-b border-gray-300 text-center"><p>Validación exitosa</p></div><div class="flex justify-end"><button id="close" class="px-5 py-2 bg-purple-500 hover:bg-purple-700 text-white cursor-pointer rounded-md">Aceptar</button></div></div>''')
+
+        return redirect(url_for("index"))
+
+    return render_template("atencion_reclamo.html")
+
+
+
+@app.route("/cancelar")
+def cancelar():
+    return render_template("cancelar.html")
+
+@app.route("/preguntas")
+def preguntas_frecuentes():
+    return render_template("preguntas.html")
+
+@app.route("/robo-o-extravio")
+def robo():
+    return render_template("robo.html")
+
+
+
+@app.route("/enviar", methods=["GET","POST"])
+def enviar():
     cursor = mysql.connection.cursor()
-    #OBTENER DATOS POR ID_RECLAMO
-    session["nro_reclamo"] = request.form["nro_reclamo"]
-    cursor.execute("SELECT id_reclamo,CONCAT(nombre,' ',apellido) AS usuario,direccion,telefono FROM reclamos WHERE id_reclamo=%s", (session["nro_reclamo"]))
-    data = cursor.fetchall()[0]
-    
-    cursor.execute("SELECT departamento , count(*) AS cantidad FROM reclamos GROUP BY departamento")
-    count = cursor.fetchall()
-    
-    cantidad = []
-    for i in count:
-        cantidad.append(i["cantidad"])
-    lista = {'ventas': cantidad[3], 'cliente': cantidad[1], 'marketing': cantidad[2], 'administrativo': cantidad[0]}
 
-    # OBTENER DATOS DEL CLIENTE EN TABLA
-    cursor.execute('SELECT id_reclamo, CONCAT(YEAR(fecha),"-",MONTH(fecha),"-",DAY(fecha)) AS fecha, departamento, tipo_reclamo, subtipo, mensaje, estado FROM reclamos WHERE id_reclamo=%s', (session["nro_reclamo"]))
-    tabla = cursor.fetchall()
-    print(tabla[0])
-    return render_template("verificar2.html", user=data, data=lista, tabla=tabla)
+    if request.method == "POST":
+        motivo = request.form["motivo"]
+        detalle = request.form["detalle"]
+        solicitud = request.form["solicitud"]
 
-###########################################################################
-# 2
-@app.route("/tramite")
-def tramite():
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT id_reclamo,CONCAT(nombre,' ',apellido) AS usuario,direccion,telefono FROM reclamos WHERE id_reclamo=%s", (session["nro_reclamo"]))
-    user = cursor.fetchall()[0]
-    print(user)
-    return render_template("tramite.html", id_cliente=session["id_cliente"], user=user)
+        cursor.execute("INSERT INTO cliente_reclamo (dni, motivo, detalle, solicitud) VALUES(%s,%s,%s,%s)", (session["telefono"], motivo, detalle, solicitud))
+        mysql.connection.commit()
 
-@app.route("/enviar_tramite", methods=["POST"])
-def enviar_tramite():
-    departamento =request.form["departamento"]
-    tipo = request.form["tipo"]
-    subtipo = request.form["subtipo"]
-    mensaje = request.form["mensaje"]
+        flash('''<div id="overlay" class="fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60"></div><div id="dialogo" class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg"><div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></div><div class="py-5 border-t border-b border-gray-300 text-center"><p>Validación exitosa</p></div><div class="flex justify-end"><button id="close" class="px-5 py-2 bg-purple-500 hover:bg-purple-700 text-white cursor-pointer rounded-md">Aceptar</button></div></div>''')
 
-    cursor = mysql.connection.cursor()
-    cursor.execute("INSERT INTO reclamos (ruc, fecha, dni, nombre, apellido, ciudad, correo, telefono, direccion, departamento, tipo_reclamo, subtipo, mensaje, estado) VALUES ('', NOW(), '', '', '', '', '', '', '', %s, %s, %s, %s, 'en espera')", (departamento, tipo, subtipo, mensaje))
-    mysql.connection.commit()
-    
-    return redirect(url_for("reclamo"))
+        return redirect(url_for("index"))
+    return render_template("enviar.html")
 
+
+
+@app.route('/send_sms', methods=['POST'])
+def send_sms():
+    """ A POST endpoint that sends an SMS. """
+
+    # Extract the form values:
+    numero = "51925884305"
+    mensaje = request.form['mensaje']
+
+    # Enviar SMS
+    result = vonage_client.sms.send_message({
+        'from': "Vonage APIs",
+        'to': numero,
+        'text': mensaje,
+    })
+    # Redirect the user back to the form:
+    return redirect(url_for('index'))
+
+'''
+curl -X "POST" "https://rest.nexmo.com/sms/json" -d "from=Vonage APIs" -d "text=Mensaje de texto" -d "to=51925884305" -d "api_key=4e17b532" -d "api_secret=phEdCRhz7w7OmhED"
+'''
 
 if __name__=="__main__":
-    app.run(debug=True, port=3000)
+    app.run(host="0.0.0.0", debug=True, port=3000)

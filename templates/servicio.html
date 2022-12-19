@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="pt-20 text-center">
+    <div class="text-4xl">¿Tuviste un inconveniente con nosotros?</div>
+    <div class="text-2xl pt-1">Selecciona el tema asociado y regístralo.</div>
+</div>
+
+<div class="pt-16">
+    <div class="container mx-auto px-20">
+        <div>
+            <div class="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-2 xl:px-24 pt-10 pb-10 lg:pt-1 lg:pb-10"
+                style="cursor: auto;">
+                <center>
+                    <div class="">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="2em"
+                            width="2em" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path
+                                    d="M11 14v-3h2v3h5a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h5zM2.51 8.837C3.835 4.864 7.584 2 12 2s8.166 2.864 9.49 6.837l-1.898.632a8.003 8.003 0 0 0-15.184 0l-1.897-.632zm3.796 1.265a6.003 6.003 0 0 1 11.388 0l-1.898.633a4.002 4.002 0 0 0-7.592 0l-1.898-.633z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                </center>
+                
+                <center>
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="2em"
+                    width="2em" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path
+                            d="M1 22a8 8 0 1 1 16 0h-2a6 6 0 1 0-12 0H1zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM21.548.784A13.942 13.942 0 0 1 23 7c0 2.233-.523 4.344-1.452 6.216l-1.645-1.196A11.955 11.955 0 0 0 21 7c0-1.792-.393-3.493-1.097-5.02L21.548.784zm-3.302 2.4A9.97 9.97 0 0 1 19 7a9.97 9.97 0 0 1-.754 3.816l-1.677-1.22A7.99 7.99 0 0 0 17 7a7.99 7.99 0 0 0-.43-2.596l1.676-1.22z">
+                        </path>
+                    </g>
+                </svg>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pt-1">
+    <div class="container mx-auto px-20">
+        <div>
+            <div class="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-2 xl:px-24 pt-10 pb-10 lg:pt-1 lg:pb-10"
+                style="cursor: auto;">
+                <div>
+                    <div class="px-36 font-bold text-2xl pb-5 text-center" >Servicio</div>
+                    <div class="px-36 text-justify">
+                        Para asegurarte de estar en la opción correcta, te brindamos ejemplos de algunos escenarios que puedes registrar aquí: <br>
+                        • ¿Está fallando la señal de tu celular o de alguno de tus servicios en el hogar? <br>
+                        • ¿Te hemos facturado un cobro del que no estás de acuerdo? <br>
+                        • ¿Tu internet está lento? <br>
+                        <center><a class="font-bold text-purple-700 hover:urderline" href="/servicio_reclamo">Registra tu reclamo aquí</a></center>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="px-36 font-bold text-2xl pb-5 text-center" >Atención</div>
+                    <div class="px-36 text-justify">
+                        Registra aquí inconvenientes con la atención de nuestros asesores.
+                        Para asegurarte de estar en la opción correcta, te brindamos ejemplos de algunos escenarios que puedes registrar aquí: <br>
+                        • ¿Estas inconforme con nuestros tiempos de espera? <br>
+                        • ¿La información que te brindamos no fue la correcta? <br>
+                        <center><a class="font-bold text-purple-700" href="/atencion_reclamo">Registra tu reclamo aquí</a></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="px-56 text-justify text-sm">
+    <div class="px-56 pb-14">
+        Por disposición de OSIPTEL, al presentar un reclamo por Contratación No Solicitada o Falta de Consentimiento
+        para la Portabilidad, se efectuará automáticamente la suspensión del servicio y el bloqueo del equipo terminal
+        móvil vinculado al reclamo. En el caso de ser Cliente Corporativo se procederá con la suspensión del servicio y
+        el bloqueo de todo el pedido asociado.
+    </div>
+</div>
+
+
+
+{% endblock %}

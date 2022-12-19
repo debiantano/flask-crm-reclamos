@@ -1,0 +1,487 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<center class="pt-20 text-5xl">
+    Preguntas Frecuentes
+</center>
+
+
+<div class="flex mb-4">
+    <div class="w-1/3 p-2 text-center">
+        <!-- component -->
+        <!-- This is an example component -->
+        <div class="max-w-lg ml-20 pt-40 pl-10">
+
+            <button class="text-black font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                type="button" data-dropdown-toggle="dropdown">Consulta <svg class="w-4 h-4 ml-2" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg></button>
+
+            <!-- Dropdown menu  consulta-->
+            <div class="h-52 overflow-auto  bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4"
+                id="dropdown">
+                <ul class="py-1 overflow-auto" aria-labelledby="dropdown">
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="saldo">Saldo</button>                  </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="portabilidad">Portabilidad</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="compra_linea">Compra en línea</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="prepago">Prepago</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="renovaciones">Renovaciones</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="pago_plan">Pago de mi plan</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="g_lte">4G LTE</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="cobertura">Cobertura
+                            extendida</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="mi_plan">Mi Plan</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="soporte_tecnico">Soporte Técnico</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="facturas">Facturas</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="numero_gratis">Número Gratis</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="roaming">Roaming</button>
+                    </li>
+                    <li class="hover:bg-gray-100">
+                        <button class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2" id="cloud">Cloud</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', () =>{
+                const preguntas_saldo = document.querySelector('#preguntas_saldo')
+                const preguntas_portabilidad = document.querySelector('#preguntas_portabilidad')
+                const preguntas_compra_linea = document.querySelector('#preguntas_compra_linea')
+                const inicio = document.querySelector('#inicio')
+                const saldo = document.querySelector('#saldo')
+
+                const portabilidad = document.querySelector('#portabilidad')
+                const compra_linea = document.querySelector('#compra_linea')
+                const prepago = document.querySelector('#prepago')
+                const renovaciones = document.querySelector('#renovaciones')
+                const pago_plan = document.querySelector('#pago_plan')
+                const g_lte = document.querySelector('#g_lte')
+                const cobertura = document.querySelector('#cobertura')
+                const mi_plan = document.querySelector('#mi_plan')
+                const soporte_tecnico = document.querySelector('#soporte_tecnico')
+                const facturas = document.querySelector('#facturas')
+                const numero_gratis = document.querySelector('#numero_gratis')
+                const roaming = document.querySelector('#roaming')
+                const cloud = document.querySelector('#cloud')
+    
+                const toggleModal = () => {
+                    preguntas_saldo.classList.remove('hidden')
+                    inicio.classList.add("hidden")
+                    preguntas_portabilidad.classList.add("hidden")
+                    preguntas_compra_linea.classList.add("hidden")
+                }
+    
+                saldo.addEventListener('click', toggleModal)
+
+
+                const toggleModal2 = () => {
+                    preguntas_portabilidad.classList.remove('hidden')
+                    inicio.classList.add("hidden")
+                    preguntas_saldo.classList.add("hidden")
+                    preguntas_compra_linea.classList.add("hidden")
+                }
+    
+                portabilidad.addEventListener('click', toggleModal2)
+
+
+                const toggleModal3 = () => {
+                    preguntas_compra_linea.classList.remove('hidden')
+                    inicio.classList.add("hidden")
+                    preguntas_saldo.classList.add("hidden")
+                    preguntas_portabilidad.classList.add('hidden')
+                }
+    
+                compra_linea.addEventListener('click', toggleModal3)
+            })
+    
+        </script>
+
+    </div>
+    <div class="w-2/3 p-2">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+
+
+        <div class="pt-20 grid items-center">
+            <div class="w-8/12 mx-auto rounded border hidden" id="preguntas_saldo">
+                <div class="bg-white p-10 shadow-sm">
+
+                    <!-- What is term -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cuántos datos/MB me quedan disponibles?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5 my-5">
+                                Para validar tus MB restantes, ingresa a https://mi.crm.com.mx/extranet y en menú de Mi linea da clic en saldo o marca *72536 desde tu movistar
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- When to use Accordion Components -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cómo consulto mi saldo?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Puedes consultar tu saldo en Mi Movistar o desde tu Movistar marcando *72536
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Accordion Wrapper -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cuáles son los montos recarga que aplican en días Movistar?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Participan las recargas de: $10, $20, $30, $40, $50, $60, $100, $120, $300 y $500 y todas te dan el doble de tiempo aire.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Accordion Wrapper -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Porqué hay 2 tipo de saldo pagado y promocional?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                El saldo pagado es la cantidad de la recarga que hiciste y el promocional lo que te regalamos por tu recarga. Tiene una vigencia determinada y sólo se obtiene por medio de promociones, puedes usarlo para hacer llamadas, mandar SMS o navegar de acuerdo a la tarifa de tu oferta vigente.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cómo puedo pasar saldo a otro?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Pasa Saldo te permite enviarle desde $10 hasta $50 pesos a cualquiera de tus contactos Movistar que lo necesiten. Puedes usar el servicio dede nuestra app de Mi Movistar o marcando *767 Marcando gratis al *767 Cuando marques escucharás una grabación que te pedirá lo siguiente: 1. Marca el número Movistar al que deseas pasar saldo. 2. Ingresa el monto entre $10 y $50 pesos que deseas transferir. Si al terminar estos pasos escuchas que tu operación está en proceso, deberás recibir en breve una notificación vía SMS de que tu operación fue exitosa.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cuándo me depositan mi saldo? (plan ahorro)</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                El saldo de tu plan ahorro se deposita un día después del corte de tu plan, es decir si tu plan corta los días 19 de cada mes, el día 20 ya contarás con tu saldo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-8/12 mx-auto rounded border hidden" id="preguntas_portabilidad">
+                <div class="bg-white p-10 shadow-sm">
+
+                    <!-- What is term -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿En qué momento puedo hacer el trámite?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5 my-5">
+                                En el momento que lo desees, es importante que sepas que el cambio de compañía no cancela los adeudos con tu compañía actual.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- When to use Accordion Components -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Durante el trámite de mi portabilidad me puedo quedar sin servicio?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                "No, tu compañía actual te debe dar el servicio hasta la fecha de tu portabilidad. El día de tu cambio de compañía deberás insertar tu SIM en tu Smartphone. Si tu equipo no está desbloqueado, tienes derecho a solicitar a tu compañía anterior que lo haga en 24 horas, siempre y cuando ya lo hayas terminado de pagar.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Accordion Wrapper -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Puedo realizar la portabilidad con un número que ya se dio de baja?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Sí, siempre y cuando la cancelación de la línea en la modalidad de plan no pase de los 40 días naturales. Para cambiarte a Movistar, debes entregar la carta de cancelación de tu línea a tu asesor de ventas.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Accordion Wrapper -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Tiene algún costo la portabilidad?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                No, el cambio es gratis.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cuánto tiempo tarda el trámite de portabilidad?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Una vez entregada toda la documentación, el ejecutivo ingresará la solicitud al sistema en un horario hábil (de lunes a sábado de 11:00 a 17:00 horas, huso horario del centro).
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Estaba en Movistar y me cambiaron sin consentimiento a otra compañía, cómo me regreso?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Acude a algún Centro de Atención y Ventas, acércate con un ejecutivo y coméntale fuiste portado a otra compañía sin tu consentimiento. Te solicitaremos la siguiente documentación para poder realizarlo: DNI, última factura, conserva tu chip
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-8/12 mx-auto rounded border hidden" id="preguntas_compra_linea">
+                <div class="bg-white p-10 shadow-sm">
+
+                    <!-- What is term -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cuál es el costo por gastos de envío?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5 my-5">
+                                La empresa te ofrece comodidad y flexibilidad para que realices tus compras. Para ello enviamos tu pedido de forma gratuita al domicilio o CAC que nos indiques.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- When to use Accordion Components -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cómo comprar?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Paso 1: Conoce nuestros equipos o planes que tenemos para ti. Paso 2: Elige tu equipo o plan favorito. Paso 3: Agrégalo a tu carrito de compra y dale clic en el botón de Check out. Paso 4: Decide si quieres recibir tu compra en el CAC (Centro de atención a clientes) más cercano o en tu domicilio, el costo del envío es gratuito. Paso 5: Realiza tu pago en línea con tarjeta de crédito o pago referenciado. Paso 6: Recibe tu equipo en un periodo no mayor a 72 horas.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Accordion Wrapper -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Puedo recibir mi compra en una dirección distinta a la de mi domicilio?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                ¡Por supuesto! Sólo tienes que introducir tu nueva dirección de envío en el momento de hacer tu pedido.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Accordion Wrapper -->
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿A qué Estados realizamos envíos?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Tenemos cobertura nacional, en caso de no llegar el equipo se enviará el equipo al CAC más cercano o seleccionado por el cliente.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Puedo rastrear mi pedido?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Sí, puedes rastrear tu compra mediante nuestro portal, se habilitará una opción en la parte inferior izquierda donde deberás insertar el número de orden de tu compra y correo electrónico, ahí verás los avances del proceso de entrega de tu equipo.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Cuánto tiempo tardan los envíos de la tienda?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Todos los pedidos confirmados en nuestra tienda online se envían en un plazo aproximado de 1 a 3 días hábiles.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="transition hover:bg-indigo-50">
+                        <!-- header -->
+                        <div class="accordion-header cursor-pointer transition flex space-x-5 px-5 items-center h-16">
+                            <i class="fas fa-plus"></i>
+                            <h3>¿Qué ocurre después de que realizo mi pago?</h3>
+                        </div>
+                        <!-- Content -->
+                        <div class="accordion-content px-5 pt-0 overflow-hidden max-h-0">
+                            <p class="leading-6 font-light pl-9 text-justify my-5">
+                                Cuando completes el pago de tu pedido, recibirás un mail con tu recibo o ficha de pago. Nosotros nos pondremos en contacto contigo en el caso de que necesitemos más información para hacer el envío o si hubiera algún contratiempo con tu pedido.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- POR DEFECTO-->
+            <div class="w-8/12 mx-auto rounded" id="inicio">
+                <div class="text-2xl text-center px-20 pt-10">
+                    Descubre aquí información de ayuda sobre
+                nuestro servicio y resuelve tus inquietudes
+                </div>
+                
+                    <center class="pt-10">
+                        <img src="https://www.consumidor.gob.pe/image/journal/article?img_id=1703668&t=1500674060735" alt="" width="200" height="300">
+                    </center>
+                
+            </div>
+
+        </div>
+
+        <style>
+            .accordion-content {
+                transition: max-height 0.3s ease-out, padding 0.3s ease;
+            }
+        </style>
+
+        <script>
+            const accordionHeader = document.querySelectorAll(".accordion-header");
+            accordionHeader.forEach((header) => {
+                header.addEventListener("click", function () {
+                    const accordionContent = header.parentElement.querySelector(".accordion-content");
+                    let accordionMaxHeight = accordionContent.style.maxHeight;
+
+                    // Condition handling
+                    if (accordionMaxHeight == "0px" || accordionMaxHeight.length == 0) {
+                        accordionContent.style.maxHeight = `${accordionContent.scrollHeight + 32}px`;
+                        header.querySelector(".fas").classList.remove("fa-plus");
+                        header.querySelector(".fas").classList.add("fa-minus");
+                        header.parentElement.classList.add("bg-indigo-50");
+                    } else {
+                        accordionContent.style.maxHeight = `0px`;
+                        header.querySelector(".fas").classList.add("fa-plus");
+                        header.querySelector(".fas").classList.remove("fa-minus");
+                        header.parentElement.classList.remove("bg-indigo-50");
+                    }
+                });
+            });
+        </script>
+
+    </div>
+</div>
+
+
+<div class="h-36">
+    
+</div>
+
+
+
+
+{% endblock %}

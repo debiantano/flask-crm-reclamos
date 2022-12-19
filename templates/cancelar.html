@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="pt-20 text-5xl text-center">
+    Cancelación de mi línea
+</div>
+
+<center>
+    <div class="w-8/12">
+        <div class="text-gray-700 text-2xl pt-10">
+            Implica la cancelación de tu contrato y la baja de tu línea así como todos los servicios adicionales
+            contratados asociados.
+        </div>
+    </div>
+</center>
+
+
+<center class="pt-12">
+    <div id="main" class="grid grid-cols-3 gap-1 justify-evenly">
+        <div class="w-26 h-12">
+            <svg class="hi-outline hi-cog inline-block w-16 h-16 text-indigo-500" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            <div class="pt-4">
+                Ser el titular de la linea
+            </div>
+        </div>
+        <div class="w-26 h-12">
+            <svg class="hi-outline hi-cog inline-block w-16 h-16 text-indigo-500" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+            <div class="pt-4">
+                Contar con el número que <br> deseas cancelar.
+            </div>
+        </div>
+        <div class="w-26 h-12">
+            <svg class="hi-outline hi-cog inline-block w-16 h-16 text-indigo-500" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                </path>
+            </svg>
+            <div class="pt-4">
+                Obtener el código de cancelación
+            </div>
+        </div>
+    </div>
+</center>
+
+
+<!--DOCS-->
+<div class="flex justify-center">
+    <div class="flex grid grid-cols-3 gap-4 justify-center pt-40">
+        <div class="ml-48">
+            <img src="https://infoabonados.movistar.com.pe/documents/14320621/14470068/PNG-OCT-Centro-7.png/235d9c2a-e11a-f0fd-b7f6-4b343cd10027?t=1638380356272"
+                width="80" height="80">
+        </div>
+        <div>¿Quieres dar de baja tu servicio prepago?</div>
+        <a href="https://infoabonados.movistar.com.pe/documents/14320621/14470086/PDF_FEB_Quieres+solicitar+la+baja+de+tu+servicio.pdf/4491e005-821c-1d20-1971-e969750abc50" target="_blank" class="text-purple-700 hover:underline">
+            Más información
+        </a>
+        <div class="ml-48">
+            <img src="https://infoabonados.movistar.com.pe/documents/14320621/14470068/PNG-OCT-Centro-7.png/235d9c2a-e11a-f0fd-b7f6-4b343cd10027?t=1638380356272"
+                width="80" height="80">
+        </div>
+        <div>¿Quieres dar de baja tu servicio postpago?</div>
+        <a href="https://infoabonados.movistar.com.pe/documents/14320621/14470086/PDF_FEB_Quieres+solicitar+la+baja+de+tu+servicio.pdf/4491e005-821c-1d20-1971-e969750abc50" target="_blank" class="text-purple-700 hover:underline">
+            Más información
+        </a>
+        <div class="ml-48">
+            <img src="https://infoabonados.movistar.com.pe/documents/14320621/14470068/PNG-NOV-Indebido.png/9a486c08-03d7-1fc1-3de8-3bd964df6f24?t=1638380320542"
+                width="80" height="80">
+        </div>
+        <div>¿Quieres suspender temporalmente tu servicio?</div>
+        <a href="https://infoabonados.movistar.com.pe/documents/14320621/14470086/Quieres+suspender+temporalmente+tu+servicio.pdf/4c8a6a38-c9ff-f774-f32e-fba664bf8d72" target="_blank" class="text-purple-700 hover:underline">
+            Más información
+        </a>
+        <div class="ml-48">
+            <img src="https://infoabonados.movistar.com.pe/documents/14320621/14470068/ST-Ilustracion.png/4645b25d-c7c0-fd28-440a-5ab612bc3518?t=1638380484928"
+                width="80" height="80">
+        </div>
+        <div>¿Quieres migrar de plan tarifario?</div>
+        <a href="https://infoabonados.movistar.com.pe/documents/14320621/14470086/PDF_FEB_Quieres+migrar+de+plan+tarifario.pdf/fef362f7-2671-c1c9-9d84-80000db92b1f" target="_blank" class="text-purple-700 hover:underline">
+            Más información
+        </a>
+    </div>
+</div>
+
+
+<center class="py-12">
+    Si aún tienes dudas puedes comunicarte con nosotros en: <a class="text-purple-700 hover:underline" href="/servicio_reclamo">Registra tu reclamo aquí</a>, nuestros <br> operadores te atenderán lo más pronto posible.
+</center>
+
+<!--
+    <div class="flex space-x-2 justify-center pt-4">
+    <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+        class="inline-block px-6 py-2.5 bg-purple-900 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out">Comunícate
+        con nosotros</button>
+</div>
+-->
+
+<!-- component -->
+<style>
+    .tab {
+        overflow: hidden;
+    }
+
+    .tab-content {
+        max-height: 0;
+        transition: all 0.5s;
+    }
+
+    input:checked+.tab-label .test {
+        background-color: #000;
+    }
+
+    input:checked+.tab-label .test svg {
+        transform: rotate(180deg);
+        stroke: #fff;
+    }
+
+    input:checked+.tab-label::after {
+        transform: rotate(90deg);
+    }
+
+    input:checked~.tab-content {
+        max-height: 100vh;
+    }
+</style>
+
+<main class="w-3/5 p-8 mx-auto hidden">
+    <section class="shadow row">
+        <div class="tabs">
+            <div class="border-b tab">
+                <div class="border-l-2 border-transparent relative">
+                    <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox" id="chck1">
+                    <header class="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label"
+                        for="chck1">
+                        <span class="text-grey-darkest font-thin text-xl">
+                            ¿Hay algún cobro por hacer una cancelación con plazo forzoso?
+                        </span>
+                        <div class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test">
+                            <!-- icon by feathericons.com -->
+                            <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"
+                                width="24" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="6 9 12 15 18 9">
+                                </polyline>
+                            </svg>
+                        </div>
+                    </header>
+                    <div class="tab-content">
+                        <div class="pl-8 pr-8 pb-5 text-grey-darkest">
+                            <ul class="pl-4">
+                                <li class="pb-2">
+                                    Si, considera los siguientes conceptos:
+                                </li>
+                                <li class="pb-2">
+                                    • Cargo por servicios adeudados y prestados
+
+                                </li>
+                                <li class="pb-2">
+                                    • Penalización por cancelación anticipada
+                                </li>
+                                <li class="pb-2">
+                                    • Remanente del equipo para cubrir su costo total
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-b tab">
+                <div class="border-l-2 border-transparent relative">
+                    <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox" id="chck2">
+                    <header class="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label"
+                        for="chck2">
+                        <span class="text-grey-darkest font-thin text-xl">
+                            ¿Dónde puedo cancelar mi línea?
+                        </span>
+                        <div class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test">
+                            <!-- icon by feathericons.com -->
+                            <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"
+                                width="24" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="6 9 12 15 18 9">
+                                </polyline>
+                            </svg>
+                        </div>
+                    </header>
+                    <div class="tab-content">
+                        <div class="pl-8 pr-8 pb-5 text-grey-darkest">
+                            <ul class="pl-4">
+                                <li class="pb-2">
+                                    Puedes acudir a cualquiera de nuestros centros de atención y ventas o llamar al
+                                    *611.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-b tab">
+                <div class="border-l-2 border-transparent relative">
+                    <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox" id="chck3">
+                    <header class="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label"
+                        for="chck3">
+                        <span class="text-grey-darkest font-thin text-xl">
+                            ¿Hay algún cobro por hacer una cancelación sin plazo forzoso?
+                        </span>
+                        <div class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test">
+                            <!-- icon by feathericons.com -->
+                            <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"
+                                width="24" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="6 9 12 15 18 9">
+                                </polyline>
+                            </svg>
+                        </div>
+                    </header>
+                    <div class="tab-content">
+                        <div class="pl-8 pr-8 pb-5 text-grey-darkest">
+                            <ul class="pl-4">
+                                <li class="pb-2">
+                                    Si, considera los siguientes conceptos:
+                                </li>
+                                <li class="pb-2">
+                                    • Cargo por servicios adeudados y prestados
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-b tab">
+                <div class="border-l-2 border-transparent relative">
+                    <input class="w-full absolute z-10 cursor-pointer opacity-0 h-5 top-6" type="checkbox" id="chck3">
+                    <header class="flex justify-between items-center p-5 pl-8 pr-8 cursor-pointer select-none tab-label"
+                        for="chck3">
+                        <span class="text-grey-darkest font-thin text-xl">
+                            ¿Cómo obtengo mi código de cancelación?
+                        </span>
+                        <div class="rounded-full border border-grey w-7 h-7 flex items-center justify-center test">
+                            <!-- icon by feathericons.com -->
+                            <svg aria-hidden="true" class="" data-reactid="266" fill="none" height="24" stroke="#606F7B"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"
+                                width="24" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="6 9 12 15 18 9">
+                                </polyline>
+                            </svg>
+                        </div>
+                    </header>
+                    <div class="tab-content">
+                        <div class="pl-8 pr-8 pb-5 text-grey-darkest">
+                            <ul class="pl-4">
+                                <li class="pb-2">
+                                    Cuando tramites tu cancelación el ejecutivo de atención te dará las indicaciones,
+                                    debes tener a la mano tu número que quieres cancelar y acceso a tu mail de contacto
+                                    que tienes registrado en la cuenta, ya que ahí se enviará el código.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+{% endblock %}
