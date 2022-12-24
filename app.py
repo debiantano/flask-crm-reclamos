@@ -43,9 +43,9 @@ def servicio_reclamo():
     
     #Reclamo(nombres, ap_paterno, ap_materno, correo, dni, estado))
     if request.method == "POST":
-        reclamo = ServicioReclamo(request.form["nombres"], request.form["ap_paterno"], request.form["ap_materno"], request.form["correo"], request.form["dni"], estado="pendiente", motivo="", detalle="", solicitud="", fecha=datetime.today().strftime('%Y-%m-%d'))
+        sr = ServicioReclamo(request.form["nombres"], request.form["ap_paterno"], request.form["ap_materno"], request.form["correo"], request.form["dni"], estado="pendiente", motivo="", detalle="", solicitud="", fecha=datetime.today().strftime('%Y-%m-%d'))
         
-        cursor.execute("SELECT dni FROM cliente WHERE nombres=%s and apellido_paterno=%s and apellido_materno=%s and correo=%s and dni=%s", (reclamo.nombres, reclamo.ap_paterno, reclamo.ap_materno, reclamo.correo, reclamo.dni))
+        cursor.execute("SELECT dni FROM cliente WHERE nombres=%s and apellido_paterno=%s and apellido_materno=%s and correo=%s and dni=%s", (sr.nombres, sr.ap_paterno, sr.ap_materno, sr.correo, sr.dni))
         
         data = cursor.fetchall()
         if data:
@@ -63,18 +63,9 @@ def atencion_reclamo():
     cursor = mysql.connection.cursor()
     
     if request.method == "POST":
-        r = AtencionReclamo(request.form["nombres"], request.form["ap_paterno"], request.form["ap_materno"], request.form["correo"], request.form["dni"], estado="pendiente", fecha=datetime.today().strftime('%Y-%m-%d'), msg=request.form["msg"])
-        #nombres = request.form["nombres"]
-        #ap_paterno = request.form["ap_paterno"]
-        #ap_materno= request.form["ap_materno"]
-        #correo = request.form["correo"]
-        #dni = request.form["dni"]
-        #telefono = request.form["telefono"]
-        #msg = request.form["msg"]
-
-        #cursor.execute("INSERT INTO atencion_reclamo (nombres, apellido_paterno, apellido_materno, correo, dni, telefono, msg) VALUES(%s,%s,%s,%s,%s,%s,%s)", (nombres, ap_paterno, ap_materno, correo, dni, telefono, msg))
-
-        cursor.execute("INSERT INTO atencion_reclamo (nombres, apellido_paterno, apellido_materno, correo, dni, telefono, msg) VALUES(%s,%s,%s,%s,%s,%s,%s)", (r.nombres, r.ap_paterno, r.ap_materno, r.correo, r.dni, request.form["telefono"], r.msg))
+        ar = AtencionReclamo(request.form["nombres"], request.form["ap_paterno"], request.form["ap_materno"], request.form["correo"], request.form["dni"], estado="pendiente", fecha=str(datetime.today().strftime('%Y-%m-%d')), msg=request.form["msg"])
+        print(ar.fecha)
+        cursor.execute("INSERT INTO atencion_reclamo (nombres, apellido_paterno, apellido_materno, correo, dni, telefono, msg, fecha) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)", (ar.nombres, ar.ap_paterno, ar.ap_materno, ar.correo, ar.dni, request.form["telefono"], ar.msg, ar.fecha))
         mysql.connection.commit()
         flash(str(CONTEXT.request(Exito)))
 
@@ -103,7 +94,8 @@ def enviar():
         detalle = request.form["detalle"]
         solicitud = request.form["solicitud"]
 
-        cursor.execute("INSERT INTO servicio_reclamo (dni, motivo, detalle, solicitud) VALUES(%s,%s,%s,%s)", (session["dni"], motivo, detalle, solicitud))
+        cursor.execute("INSERT INTO servicio_reclamo (dni, motivo, detalle, solicitud, fecha) VALUES(%s,%s,%s,%s,%s)", (session["dni"], motivo, detalle, solicitud, str(datetime.today().strftime('%Y-%m-%d'))))
+        
         mysql.connection.commit()
         flash(str(CONTEXT.request(Envio)))
 
@@ -126,18 +118,30 @@ def send_sms():
 
     # Extraer datos del formulario:
     numero = VONAGE_NUMBER
-    tlf = request.form["tlf"]
-    mensaje = request.form['mensaje']
-    msg = f"❗Número extraviado: [{tlf}]\n{mensaje}"
+    if request.form["tlf"] and request.form["mensaje"]:
+        tlf = request.form["tlf"]
+        mensaje = request.form['mensaje']
 
-    # Enviar SMS
-    result = vonage_client.sms.send_message({
-        'from': "Vonage APIs",
-        'to': numero,
-        'text': msg,
-    })
-    flash(str(CONTEXT.request(Envio)))
-    return redirect(url_for('index'))
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM cliente WHERE telefono=%s", (tlf,))
+        data = cursor.fetchall()
+
+        if data:
+            msg = f'❗*Número extraviado*: {tlf}\n[+]Nombre cliente:\n{data[0]["apellido_paterno"]} {data[0]["apellido_materno"]} {data[0]["nombres"]}\n\n[+]Email de contacto:\n{data[0]["correo"]}\n\n[+]Mensaje:\n{mensaje}'
+            # Enviar SMS
+            result = vonage_client.sms.send_message({
+                'from': "Vonage APIs",
+                'to': numero,
+                'text': msg,
+            })
+            flash(str(CONTEXT.request(Envio)))
+            return redirect(url_for('index'))
+        else:
+            flash(str(CONTEXT.request(Error)))
+            return redirect(url_for("index"))
+    else:
+        flash(str(CONTEXT.request(FormIncompleto)))
+        return redirect(url_for("index"))
 
 '''
 curl -X "POST" "https://rest.nexmo.com/sms/json"

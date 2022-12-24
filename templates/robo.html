@@ -1,25 +1,186 @@
-<div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
-    <div class="bg-gray-200 max-w-sm py-2 px-3 rounded shadow-xl text-gray-800">
-        <div class="flex justify-between items-center">
-            <h4 class="text-lg font-bold">SMS</h4>
-            <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal" fill="currentColor"
-                viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
-            </svg>
-        </div>
-        <div class="mt-2 text-sm">
-            <div class="font-bold pb-3">Te responderemos en unos minutos</div>
-        </div>
-        <div class="mt-3 flex justify-end space-x-3">
+{% extends 'base.html' %}
+{% block body %}
 
-            <form action="/send_sms" method="POST">
-                <textarea class="relative z-0 mb-6 w-full group border-2 border-gray-400" placeholder="..."
-                    name="mensaje" id="" cols="30" rows="3"></textarea>
-                <center><button class="px-3 py-1 bg-purple-800 text-gray-200 hover:bg-purple-600 rounded">Enviar</button></center>
-            </form>
+<div class="pt-20 text-center">
+    <div class="text-4xl pt-5">Reporte de robo o extravío</div>
+    <div class="text-2xl pt-1">Aquí te decimos cómo suspender y/o bloquear tu línea</div>
+</div>
 
-        </div>
+<div class="px-96 h-34 text-justify">
+    <div class="pt-12">
+        Vía telefónica
+        También puedes suspender tu línea y/o bloquear tu equipo marcando <strong>*611</strong> desde cualquier equipo o
+        al <strong>600 555 6366</strong>. Después, selecciona el símbolo # y registra tu número de 10 dígitos.
+    </div>
+
+    <div class="pt-5">
+        Es muy importante que proporciones la información que se te solicita, ya que así evitamos que un tercero ajeno
+        al titular suspenda la línea o bloquee el equipo. Te recomendamos tener disponible el IMEI de tu equipo, el cual
+        se indica en la factura de compra del mismo, en caso de que no lo tengas disponible, nosotros te lo indicaremos.
+        Este servicio es sin costo.
+    </div>
+
+    <div class="pt-5">
+        Sólo en caso de que tengas contratado el seguro por robo de equipo, y quieras hacer efectiva la póliza de
+        seguro, tendrás que acudir a un Centro de Atención al Cliente y presentar el acta emitida por el Ministerio
+        Público.
+    </div>
+
+    <div class="pt-5">
+        Consulta gratuitamente si tu equipo terminal móvil cuenta con un reporte por robo o extravío presentando
+        identificación oficial en tu Centro de Atención y Ventas más cercano o a través de este link
+        <a class="text-purple-900" href="#"><u>http://www.ejemplo/consulta-extravio</u></a>
     </div>
 </div>
+
+
+
+
+
+
+
+
+<div class="container mx-auto px-72 pt-10 pb-50">
+    <div>
+        <div class="grid grid-cols-1 gap-1 md:grid-cols-2 xl:grid-cols-2 xl:px-24 pt-10 pb-10 lg:pt-1 lg:pb-1">
+            <div class="text-justify px-2">
+                <div class="rounded ">Comunicate con nosotros ahora mismo, por nuestro whatsapp o enviandonos un mensaje
+                    a nuestro numero de empresa, nuestros operadores no tardarn en contactarse con usted.</div>
+            </div>
+
+            <div class="grid grid-cols-2">
+                <button class="mb-48 mx-10 py-3 bg-gray-200 hover:bg-gray-300 text-blue-700 rounded shadow"
+                    id="delete-btn">
+                    <center>
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                            </path>
+                        </svg>
+                        SMS
+                    </center>
+                </button>
+
+                <button class="mb-48 mx-10 py-3 bg-gray-200 hover:bg-gray-300 text-green-700 rounded shadow"
+                    id="delete-btn-wsp">
+                    <center>
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1"
+                            viewBox="0 0 16 16" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M13.641 2.325c-1.497-1.5-3.488-2.325-5.609-2.325-4.369 0-7.925 3.556-7.925 7.928 0 1.397 0.366 2.763 1.059 3.963l-1.125 4.109 4.203-1.103c1.159 0.631 2.463 0.966 3.787 0.966h0.003c0 0 0 0 0 0 4.369 0 7.928-3.556 7.928-7.928 0-2.119-0.825-4.109-2.322-5.609zM8.034 14.525v0c-1.184 0-2.344-0.319-3.356-0.919l-0.241-0.144-2.494 0.653 0.666-2.431-0.156-0.25c-0.663-1.047-1.009-2.259-1.009-3.506 0-3.634 2.956-6.591 6.594-6.591 1.759 0 3.416 0.688 4.659 1.931 1.244 1.247 1.928 2.9 1.928 4.662-0.003 3.637-2.959 6.594-6.591 6.594zM11.647 9.588c-0.197-0.1-1.172-0.578-1.353-0.644s-0.313-0.1-0.447 0.1c-0.131 0.197-0.512 0.644-0.628 0.778-0.116 0.131-0.231 0.15-0.428 0.050s-0.838-0.309-1.594-0.984c-0.588-0.525-0.987-1.175-1.103-1.372s-0.013-0.306 0.088-0.403c0.091-0.088 0.197-0.231 0.297-0.347s0.131-0.197 0.197-0.331c0.066-0.131 0.034-0.247-0.016-0.347s-0.447-1.075-0.609-1.472c-0.159-0.388-0.325-0.334-0.447-0.341-0.116-0.006-0.247-0.006-0.378-0.006s-0.347 0.050-0.528 0.247c-0.181 0.197-0.694 0.678-0.694 1.653s0.709 1.916 0.809 2.050c0.1 0.131 1.397 2.134 3.384 2.991 0.472 0.203 0.841 0.325 1.128 0.419 0.475 0.15 0.906 0.128 1.247 0.078 0.381-0.056 1.172-0.478 1.338-0.941s0.166-0.859 0.116-0.941c-0.047-0.088-0.178-0.137-0.378-0.238z">
+                            </path>
+                        </svg>
+                        WSP
+                    </center>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay">
+        <div class="bg-gray-200 max-w-sm py-2 px-3 rounded shadow-xl text-gray-800">
+            <div class="flex justify-between items-center">
+                <h4 class="text-lg font-bold">SMS</h4>
+                <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+
+            </div>
+            <div class="mt-2 text-sm">
+                <div class="font-bold pb-3">Te responderemos en unos minutos</div>
+            </div>
+            <div class="mt-3 flex justify-end space-x-3">
+
+                <form action="/send_sms" method="POST">
+                    <input name="tlf" class=" w-full group border-2 border-gray-400 mb-3" type="text"
+                        placeholder="Numero extraviado">
+                    <textarea class="relative z-0 mb-6 w-full group border-2 border-gray-400" placeholder="..."
+                        name="mensaje" id="" cols="30" rows="3"></textarea>
+                    <center><button
+                            class="px-3 py-1 bg-purple-800 text-gray-200 hover:bg-purple-600 rounded">Enviar</button>
+                    </center>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="bg-black bg-opacity-50 absolute inset-0 hidden justify-center items-center" id="overlay-wsp">
+        <div class="bg-gray-200 max-w-sm py-2 px-3 rounded shadow-xl text-gray-800">
+            <div class="flex justify-between items-center">
+                <h4 class="text-lg font-bold">WSP</h4>
+                <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close-modal-wsp"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+
+            </div>
+            <div class="mt-2 text-sm">
+                <div class="font-bold pb-3">Te responderemos en unos minutos</div>
+            </div>
+            <div class="mt-3 flex justify-end space-x-3">
+
+                <form action="/wsp" method="POST">
+                    <input name="tlf" class=" w-full group border-2 border-gray-400 mb-3" type="text"
+                        placeholder="Numero extraviado">
+                    <textarea class="relative z-0 mb-6 w-full group border-2 border-gray-400" placeholder="..."
+                        name="wsp" id="" cols="30" rows="3"></textarea>
+                    <center><button
+                            class="px-3 py-1 bg-purple-800 text-gray-200 hover:bg-purple-600 rounded">Enviar</button>
+                    </center>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.querySelector('#overlay')
+        const delBtn = document.querySelector('#delete-btn')
+        const closeBtn = document.querySelector('#close-modal')
+
+        const toggleModal = () => {
+            overlay.classList.toggle('hidden')
+            overlay.classList.toggle('flex')
+        }
+
+        delBtn.addEventListener('click', toggleModal)
+
+        closeBtn.addEventListener('click', toggleModal)
+    })
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.querySelector('#overlay-wsp')
+        const delBtn = document.querySelector('#delete-btn-wsp')
+        const closeBtn = document.querySelector('#close-modal-wsp')
+
+        const toggleModal = () => {
+            overlay.classList.toggle('hidden')
+            overlay.classList.toggle('flex')
+        }
+
+        delBtn.addEventListener('click', toggleModal)
+
+        closeBtn.addEventListener('click', toggleModal)
+    })
+
+</script>
+
+{% endblock %}

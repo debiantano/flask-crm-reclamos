@@ -1,26 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.1.3
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Dec 18, 2022 at 11:53 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `crm_reclamos`
---
-
 -- --------------------------------------------------------
 
 --
@@ -35,25 +12,27 @@ CREATE TABLE `atencion_reclamo` (
   `correo` varchar(45) DEFAULT NULL,
   `dni` varchar(45) DEFAULT NULL,
   `telefono` varchar(45) DEFAULT NULL,
-  `msg` varchar(100) DEFAULT NULL
+  `msg` varchar(100) DEFAULT NULL,
+  `fecha` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `atencion_reclamo`
 --
 
-INSERT INTO `atencion_reclamo` (`id_atencion`, `nombres`, `apellido_paterno`, `apellido_materno`, `correo`, `dni`, `telefono`, `msg`) VALUES
-(1, 'salas', 'sasla', 'test@test.com', '73813709', '999989999', 'qwwedws c ', NULL),
-(2, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg'),
-(3, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg'),
-(4, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg'),
-(5, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg'),
-(6, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg'),
-(7, 'test', 'test', 'test', 'test@test.com', '12', '123', 'tweast123'),
-(8, 'test', 'test', 'test', 'test@test.com', '12', '123', 'tweast123'),
-(9, 'test', 'salas', 'test', 'test@test.com', '73813709', '1111111', 'wqwwqwqw'),
-(10, 'jorge', 'salas', 'test', 'test@test.com', '73813709', '999989999', 'ewrewrew'),
-(11, 'wweew', 'ewe', 'asas', 'asas@test.com', '123', '123', 'sacxsadcsd');
+INSERT INTO `atencion_reclamo` (`id_atencion`, `nombres`, `apellido_paterno`, `apellido_materno`, `correo`, `dni`, `telefono`, `msg`, `fecha`) VALUES
+(1, 'salas', 'sasla', 'test@test.com', '73813709', '999989999', 'qwwedws c ', NULL, NULL),
+(2, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg', NULL),
+(3, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg', NULL),
+(4, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg', NULL),
+(5, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg', NULL),
+(6, 'jorge', 'salas', 'sasla', 'dimineko2@gmail.com', '41343968', '1111111', '123asasxascxsa csdfe rg', NULL),
+(7, 'test', 'test', 'test', 'test@test.com', '12', '123', 'tweast123', NULL),
+(8, 'test', 'test', 'test', 'test@test.com', '12', '123', 'tweast123', NULL),
+(9, 'test', 'salas', 'test', 'test@test.com', '73813709', '1111111', 'wqwwqwqw', NULL),
+(10, 'jorge', 'salas', 'test', 'test@test.com', '73813709', '999989999', 'ewrewrew', NULL),
+(11, 'wweew', 'ewe', 'asas', 'asas@test.com', '123', '123', 'sacxsadcsd', NULL),
+(12, '3', '3', '3', '3@test.com', '3', '3', '3', '2022-12-23');
 
 -- --------------------------------------------------------
 
@@ -75,27 +54,32 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`dni`, `nombres`, `apellido_paterno`, `apellido_materno`, `correo`, `telefono`) VALUES
-(1, '1', '1', '1', '1', '1');
+(1, '1', '1', '1', '1', '1'),
+(99830912, 'Kevin', 'Fernandez', 'Soto', 'kevin@gmail.com', '992307341');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente_reclamo`
+-- Table structure for table `servicio_reclamo`
 --
 
-CREATE TABLE `cliente_reclamo` (
+CREATE TABLE `servicio_reclamo` (
   `dni` int(11) DEFAULT NULL,
   `motivo` varchar(100) DEFAULT NULL,
   `detalle` varchar(100) DEFAULT NULL,
-  `solicitud` varchar(100) DEFAULT NULL
+  `solicitud` varchar(100) DEFAULT NULL,
+  `fecha` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `cliente_reclamo`
+-- Dumping data for table `servicio_reclamo`
 --
 
-INSERT INTO `cliente_reclamo` (`dni`, `motivo`, `detalle`, `solicitud`) VALUES
-(1, 'asasas', 'asasa', 'asasa');
+INSERT INTO `servicio_reclamo` (`dni`, `motivo`, `detalle`, `solicitud`, `fecha`) VALUES
+(1, 'asasas', 'asasa', 'asasa', NULL),
+(1, '11', '11', '11', NULL),
+(1, 'test', 'test', 'test con fecha', '2022-12-23'),
+(99830912, 'motivo_reclamo', 'detalle reclamo', 'solicitud reclamo', '2022-12-23');
 
 --
 -- Indexes for dumped tables
@@ -114,9 +98,9 @@ ALTER TABLE `cliente`
   ADD PRIMARY KEY (`dni`);
 
 --
--- Indexes for table `cliente_reclamo`
+-- Indexes for table `servicio_reclamo`
 --
-ALTER TABLE `cliente_reclamo`
+ALTER TABLE `servicio_reclamo`
   ADD KEY `reclamo_cliente` (`dni`);
 
 --
@@ -127,16 +111,16 @@ ALTER TABLE `cliente_reclamo`
 -- AUTO_INCREMENT for table `atencion_reclamo`
 --
 ALTER TABLE `atencion_reclamo`
-  MODIFY `id_atencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_atencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `cliente_reclamo`
+-- Constraints for table `servicio_reclamo`
 --
-ALTER TABLE `cliente_reclamo`
+ALTER TABLE `servicio_reclamo`
   ADD CONSTRAINT `reclamo_cliente` FOREIGN KEY (`dni`) REFERENCES `cliente` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
